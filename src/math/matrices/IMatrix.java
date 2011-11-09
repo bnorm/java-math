@@ -1,6 +1,5 @@
 package math.matrices;
 
-import java.io.Serializable;
 
 /**
  * A object representation of a mathematical matrix. This interface provides
@@ -9,7 +8,7 @@ import java.io.Serializable;
  * @author Brian Norman
  * @version 0.1 beta
  */
-public interface IMatrix extends Cloneable, Serializable {
+public interface IMatrix {
 
     // ************************** //
     // ***** ACCESS METHODS ***** //
