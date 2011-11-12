@@ -1,5 +1,12 @@
 package math.matrices;
 
+/**
+ * The object representation of a mathematical matrix. This abstract class
+ * provides an implementation for basic use.
+ * 
+ * @author Brian Norman
+ * @version 0.1 beta
+ */
 public abstract class AbstractMatrix implements IMatrix {
 
    // ****************** //
@@ -38,7 +45,7 @@ public abstract class AbstractMatrix implements IMatrix {
    }
 
    /**
-    * Creates a new matrix with a copy of specified matrix.
+    * Creates a new matrix with a copy of the specified matrix.
     * 
     * @param a
     *           the matrix to copy.
