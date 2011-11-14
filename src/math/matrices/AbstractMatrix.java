@@ -2,7 +2,8 @@ package math.matrices;
 
 /**
  * The object representation of a mathematical matrix. This abstract class
- * provides an implementation for basic use.
+ * provides an implementation for basic use. This is not a safe matrix. It does
+ * not perform any dimension checks before performing any actions.
  * 
  * @author Brian Norman
  * @version 0.1 beta
@@ -82,6 +83,8 @@ public abstract class AbstractMatrix implements IMatrix {
 
    /**
     * {@inheritDoc}
+    * 
+    * Unsafe method, does not perform dimension checks.
     */
    @Override
    public double get(int row, int column) {
@@ -90,6 +93,8 @@ public abstract class AbstractMatrix implements IMatrix {
 
    /**
     * {@inheritDoc}
+    * 
+    * Unsafe method, does not perform dimension checks.
     */
    @Override
    public double[] getRow(int r) {
@@ -102,6 +107,8 @@ public abstract class AbstractMatrix implements IMatrix {
 
    /**
     * {@inheritDoc}
+    * 
+    * Unsafe method, does not perform dimension checks.
     */
    @Override
    public double[] getColumn(int c) {
@@ -145,6 +152,8 @@ public abstract class AbstractMatrix implements IMatrix {
 
    /**
     * {@inheritDoc}
+    * 
+    * Unsafe method, does not perform dimension checks.
     */
    @Override
    public AbstractMatrix set(int row, int column, double n) {
@@ -154,6 +163,8 @@ public abstract class AbstractMatrix implements IMatrix {
 
    /**
     * {@inheritDoc}
+    * 
+    * Unsafe method, does not perform dimension checks.
     */
    @Override
    public AbstractMatrix setRow(int r, double[] v) {
@@ -166,6 +177,8 @@ public abstract class AbstractMatrix implements IMatrix {
 
    /**
     * {@inheritDoc}
+    * 
+    * Unsafe method, does not perform dimension checks.
     */
    @Override
    public AbstractMatrix setColumn(int c, double[] v) {
@@ -178,6 +191,8 @@ public abstract class AbstractMatrix implements IMatrix {
 
    /**
     * {@inheritDoc}
+    * 
+    * Unsafe method, does not perform dimension checks.
     */
    @Override
    public IMatrix set(int r, int c, double[][] a) {
@@ -233,6 +248,8 @@ public abstract class AbstractMatrix implements IMatrix {
 
    /**
     * {@inheritDoc}
+    * 
+    * Unsafe method, does not perform dimension checks.
     */
    @Override
    public AbstractMatrix add(IMatrix a) {
@@ -247,6 +264,8 @@ public abstract class AbstractMatrix implements IMatrix {
 
    /**
     * {@inheritDoc}
+    * 
+    * Unsafe method, does not perform dimension checks.
     */
    @Override
    public AbstractMatrix subtract(IMatrix a) {
@@ -261,6 +280,8 @@ public abstract class AbstractMatrix implements IMatrix {
 
    /**
     * {@inheritDoc}
+    * 
+    * Unsafe method, does not perform dimension checks.
     */
    @Override
    public AbstractMatrix multiply(IMatrix a) {
@@ -280,6 +301,8 @@ public abstract class AbstractMatrix implements IMatrix {
 
    /**
     * {@inheritDoc}
+    * 
+    * Unsafe method, does not perform dimension checks.
     */
    @Override
    public AbstractMatrix dotMultiply(IMatrix a) {
@@ -294,6 +317,8 @@ public abstract class AbstractMatrix implements IMatrix {
 
    /**
     * {@inheritDoc}
+    * 
+    * Unsafe method, does not perform dimension checks.
     */
    @Override
    public AbstractMatrix dotDivide(IMatrix a) {

@@ -2,7 +2,8 @@ package math.matrices;
 
 /**
  * The object representation of a mathematical vector. This abstract class
- * provides an implementation for basic use.
+ * provides an implementation for basic use. This is not a safe vector. It does
+ * not perform any dimension checks before performing any actions.
  * 
  * @author Brian Norman
  * @version 0.1 beta
@@ -57,6 +58,8 @@ public abstract class AbstractVector extends AbstractMatrix implements IVector {
 
    /**
     * {@inheritDoc}
+    * 
+    * Unsafe method, does not perform dimension checks.
     */
    @Override
    public double get(int i) {
@@ -96,6 +99,8 @@ public abstract class AbstractVector extends AbstractMatrix implements IVector {
 
    /**
     * {@inheritDoc}
+    * 
+    * Unsafe method, does not perform dimension checks.
     */
    @Override
    public IVector set(int i, double n) {
@@ -109,6 +114,8 @@ public abstract class AbstractVector extends AbstractMatrix implements IVector {
 
    /**
     * {@inheritDoc}
+    * 
+    * Unsafe method, does not perform dimension checks.
     */
    @Override
    public IVector set(int i, double[] v) {
@@ -144,6 +151,8 @@ public abstract class AbstractVector extends AbstractMatrix implements IVector {
 
    /**
     * {@inheritDoc}
+    * 
+    * Unsafe method, does not perform dimension checks.
     */
    @Override
    public IVector add(IVector v) {
@@ -153,6 +162,8 @@ public abstract class AbstractVector extends AbstractMatrix implements IVector {
 
    /**
     * {@inheritDoc}
+    * 
+    * Unsafe method, does not perform dimension checks.
     */
    @Override
    public IVector subtract(IVector v) {
@@ -162,6 +173,8 @@ public abstract class AbstractVector extends AbstractMatrix implements IVector {
 
    /**
     * {@inheritDoc}
+    * 
+    * Unsafe method, does not perform dimension checks.
     */
    @Override
    public IVector dotMultiply(IVector v) {
@@ -171,6 +184,8 @@ public abstract class AbstractVector extends AbstractMatrix implements IVector {
 
    /**
     * {@inheritDoc}
+    * 
+    * Unsafe method, does not perform dimension checks.
     */
    @Override
    public IVector dotDivide(IVector v) {
@@ -194,6 +209,8 @@ public abstract class AbstractVector extends AbstractMatrix implements IVector {
 
    /**
     * {@inheritDoc}
+    * 
+    * Unsafe method, does not perform dimension checks.
     */
    @Override
    public double dot(IVector v) {
