@@ -46,7 +46,7 @@ public abstract class AbstractMatrix implements IMatrix {
    }
 
    /**
-    * Creates a new matrix with a copy of the specified matrix.
+    * Creates a new matrix that is a copy of the specified matrix.
     * 
     * @param a
     *           the matrix to copy.

@@ -2,7 +2,8 @@ package math.matrices;
 
 /**
  * The object representation of a mathematical matrix. This class provides an
- * implementation for basic use.
+ * implementation for basic use. This is <em>not</em> a safe matrix. It does not
+ * perform any dimension checks before performing any actions.
  * 
  * @author Brian Norman
  * @version 0.1 beta
@@ -45,12 +46,12 @@ public class Matrix extends AbstractMatrix {
    }
 
    /**
-    * Creates a new matrix with a copy of the specified matrix.
+    * Creates a new matrix that is a copy of the specified matrix.
     * 
     * @param a
     *           the matrix to copy.
     */
-   protected Matrix(Matrix a) {
+   protected Matrix(IMatrix a) {
       super(a);
    }
 
