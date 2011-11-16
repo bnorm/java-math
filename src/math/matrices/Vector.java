@@ -2,7 +2,8 @@ package math.matrices;
 
 /**
  * The object representation of a mathematical vector. This class provides an
- * implementation for basic use.
+ * implementation for basic use. This is not a safe vector. It does not perform
+ * any dimension checks before performing any actions.
  * 
  * @author Brian Norman
  * @version 0.1 beta
@@ -43,7 +44,7 @@ public class Vector extends AbstractVector {
    }
 
    /**
-    * Creates a new vector with a copy of the specified vector.
+    * Creates a new vector that is a copy of the specified vector.
     * 
     * @param v
     *           the vector to copy.
@@ -53,13 +54,13 @@ public class Vector extends AbstractVector {
    }
 
    /**
-    * Creates a new vector with a copy of the specified matrix. If the matrix is
-    * not a vector then a vector of size zero is created.
+    * Creates a new vector that is a copy of the specified matrix. If the matrix
+    * is not a vector then a vector of size zero is created.
     * 
     * @param m
     *           the matrix to copy.
     */
-   public Vector(IMatrix m) {
+   protected Vector(IMatrix m) {
       this();
       if (m.rows() == 1) {
          set(m.getRow(0));

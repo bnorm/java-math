@@ -35,7 +35,7 @@ public abstract class AbstractVector extends AbstractMatrix implements IVector {
    }
 
    /**
-    * Creates a new vector with a copy of the specified vector.
+    * Creates a new vector that is a copy of the specified vector.
     * 
     * @param v
     *           the vector to copy.
@@ -75,15 +75,12 @@ public abstract class AbstractVector extends AbstractMatrix implements IVector {
    // ******************************** //
 
    /**
-    * Sets the vector to be the specified array. This methods does not copy but
-    * sets the array which will change if the vector is modified.
-    * 
-    * @param v
-    *           the new array for the matrix.
-    * @return the vector representation of the array.
+    * {@inheritDoc}
     */
-   protected IVector set(double[] v) {
-      set(new double[][] { v });
+   @Override
+   public AbstractMatrix set(double[][] a) {
+      super.set(a);
+      column = (columns() > rows());
       return this;
    }
 
@@ -91,9 +88,8 @@ public abstract class AbstractVector extends AbstractMatrix implements IVector {
     * {@inheritDoc}
     */
    @Override
-   protected AbstractMatrix set(double[][] a) {
-      super.set(a);
-      column = (columns() > rows());
+   public IVector set(double[] v) {
+      set(new double[][] { v });
       return this;
    }
 
