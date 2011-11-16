@@ -71,8 +71,10 @@ public final class Differentiation {
     * Richardson Extrapolation is 10.
     * 
     * @param f
+    *           the function to derive.
     * @param x
-    * @return
+    *           the point of derivation.
+    * @return the derivative of the specified function.
     */
    public static double extrapDerivative(IFunction f, double x) {
       return extrapDerivative(f, x, 10);
