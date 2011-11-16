@@ -35,7 +35,17 @@ public interface IVector extends IMatrix {
    // ******************************** //
 
    /**
-    * Sets the value at the coorespond1ing index to be the specified value.
+    * Sets the vector to be the specified array. This methods does not copy but
+    * sets the array which will change if the vector is modified.
+    * 
+    * @param v
+    *           the new array for the matrix.
+    * @return the vector representation of the array.
+    */
+   public IVector set(double[] v);
+
+   /**
+    * Sets the value at the corresponding index to be the specified value.
     * 
     * @param i
     *           the index of the value.
@@ -102,7 +112,7 @@ public interface IVector extends IMatrix {
     * operation is value based and will multiply corresponding index values.
     * This method modifies the original values of the vector.
     * 
-    * @param a
+    * @param v
     *           the vector to dot-multiply.
     * @return the original vector modified with the dot-multiplication of the
     *         specified vector.
@@ -114,7 +124,7 @@ public interface IVector extends IMatrix {
     * operation is value based and will divide corresponding index values. This
     * method modifies the original values of the vector.
     * 
-    * @param a
+    * @param v
     *           the vector to dot-divide.
     * @return the original vector modified with the dot-division of the
     *         specified vector.

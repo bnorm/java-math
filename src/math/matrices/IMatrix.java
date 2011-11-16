@@ -61,6 +61,16 @@ public interface IMatrix {
    // ******************************** //
 
    /**
+    * Sets the matrix to be the specified array. This method does not copy but
+    * sets the array which will change if the matrix is modified.
+    * 
+    * @param a
+    *           the new array for the matrix.
+    * @return the matrix representation of the array.
+    */
+   public IMatrix set(double[][] a);
+
+   /**
     * Sets the value at the corresponding row and column with the specified new
     * value.
     * 
