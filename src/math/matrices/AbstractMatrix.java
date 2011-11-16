@@ -97,10 +97,10 @@ public abstract class AbstractMatrix implements IMatrix {
     * Unsafe method, does not perform dimension checks.
     */
    @Override
-   public double[] getRow(int r) {
+   public double[] getRow(int row) {
       double[] v = new double[columns()];
       for (int i = 0; i < columns(); i++) {
-         v[i] = get(r, i);
+         v[i] = get(row, i);
       }
       return v;
    }
@@ -111,10 +111,10 @@ public abstract class AbstractMatrix implements IMatrix {
     * Unsafe method, does not perform dimension checks.
     */
    @Override
-   public double[] getColumn(int c) {
+   public double[] getColumn(int column) {
       double[] v = new double[rows()];
       for (int i = 0; i < rows(); i++) {
-         v[i] = get(i, c);
+         v[i] = get(i, column);
       }
       return v;
    }
@@ -123,31 +123,28 @@ public abstract class AbstractMatrix implements IMatrix {
    // ***** MUNIPULATION METHODS ***** //
    // ******************************** //
 
+   // /**
+   // * Sets the matrix to be equal to the specified matrix. This method does
+   // not
+   // * copy but sets the array which will change if the matrix is modified.
+   // *
+   // * @param a
+   // * the new matrix for the matrix.
+   // * @return the matrix representation of the array.
+   // */
+   // protected AbstractMatrix set(AbstractMatrix a) {
+   // return set(a.matrix);
+   // }
+
    /**
-    * Sets the matrix to be the specified array. This method does not copy but
-    * sets the array which will change if the matrix is modified.
-    * 
-    * @param a
-    *           the new array for the matrix.
-    * @return the matrix representation of the array.
+    * {@inheritDoc}
     */
-   protected AbstractMatrix set(double[][] a) {
+   @Override
+   public AbstractMatrix set(double[][] a) {
       rows = a.length;
       columns = (rows == 0 ? 0 : a[0].length);
       matrix = a;
       return this;
-   }
-
-   /**
-    * Sets the matrix to be equal to the specified matrix. This method does not
-    * copy but sets the array which will change if the matrix is modified.
-    * 
-    * @param a
-    *           the new matrix for the matrix.
-    * @return the matrix representation of the array.
-    */
-   protected AbstractMatrix set(AbstractMatrix a) {
-      return set(a.matrix);
    }
 
    /**
@@ -285,12 +282,12 @@ public abstract class AbstractMatrix implements IMatrix {
     */
    @Override
    public AbstractMatrix multiply(IMatrix a) {
-      double[][] c = new double[rows()][columns()];
+      double[][] c = new double[rows()][a.columns()];
       for (int i = 0; i < rows(); i++) {
          for (int j = 0; j < a.columns(); j++) {
             double sum = 0;
             for (int k = 0; k < a.rows(); k++) {
-               // sum += matrix[i][k] * a.matrix[k][j];
+               // sum += matrix[i][k] * a.get(k, j);
                sum += get(i, k) * a.get(k, j);
             }
             c[i][j] = sum;

@@ -62,9 +62,9 @@ public class SafeMatrix extends Matrix {
    /**
     * Returns the value at the corresponding row and column.
     * 
-    * @param r
+    * @param row
     *           the row of the value.
-    * @param c
+    * @param column
     *           the column of the value.
     * @return the value at the row and column.
     */
@@ -77,7 +77,7 @@ public class SafeMatrix extends Matrix {
    /**
     * Returns all the elements in the corresponding row.
     * 
-    * @param r
+    * @param row
     *           the row of all the elements.
     * @return all the elements in the row.
     */
@@ -90,7 +90,7 @@ public class SafeMatrix extends Matrix {
    /**
     * Returns all the elements in the corresponding column.
     * 
-    * @param c
+    * @param column
     *           the column of all the elements.
     * @return all the elements in the column.
     */
@@ -298,7 +298,7 @@ public class SafeMatrix extends Matrix {
     * @return a copy of the matrix.
     */
    @Override
-   public Matrix copy() {
+   public SafeMatrix copy() {
       return new SafeMatrix(this);
    }
 
