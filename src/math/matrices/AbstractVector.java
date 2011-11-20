@@ -193,7 +193,7 @@ public abstract class AbstractVector extends AbstractMatrix implements IVector {
     * {@inheritDoc}
     */
    @Override
-   public IMatrix cross(IVector v) {
+   public IMatrix outer(IVector v) {
       double[][] a = new double[length()][v.length()];
       for (int i = 0; i < length(); i++) {
          for (int j = 0; j < v.length(); j++) {
@@ -209,7 +209,7 @@ public abstract class AbstractVector extends AbstractMatrix implements IVector {
     * Unsafe method, does not perform dimension checks.
     */
    @Override
-   public double dot(IVector v) {
+   public double inner(IVector v) {
       double sum = 0;
       for (int i = 0; i < length(); i++) {
          sum += get(i) * v.get(i);

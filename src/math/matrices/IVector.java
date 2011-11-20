@@ -132,24 +132,24 @@ public interface IVector extends IMatrix {
    public IVector dotDivide(IVector v);
 
    /**
-    * Returns the cross-product, or outer-product, of the vector and the
-    * specified vector.
+    * Returns the outer-product of the vector and the specified vector.
     * 
     * @param v
-    *           the crossing vector.
-    * @return the cross-product of the vector crossed by the specified vector.
+    *           the outer vector.
+    * @return the outer-product of the vector multiplied by the specified
+    *         vector.
     */
-   public IMatrix cross(IVector v);
+   public IMatrix outer(IVector v);
 
    /**
-    * Returns the dot-product, or inner-product, of the vector and the specified
-    * vector.
+    * Returns the inner-product of the vector and the specified vector.
     * 
     * @param v
-    *           the dotting vector.
-    * @return the dot-product of the vector dotted by the specified vector.
+    *           the inner vector.
+    * @return the inner-product of the vector multiplied by the specified
+    *         vector.
     */
-   public double dot(IVector v);
+   public double inner(IVector v);
 
    // *************************** //
    // ***** UTILITY METHODS ***** //

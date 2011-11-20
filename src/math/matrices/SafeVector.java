@@ -408,21 +408,35 @@ public class SafeVector extends Vector {
    }
 
    /**
-    * Returns the dot-product, or inner-product, of the vector and the specified
-    * vector.
-    * 
-    * @param v
-    *           the dotting vector.
-    * @return the dot-product of the vector dotted by the specified vector.
+    * {@inheritDoc}
     */
    @Override
-   public double dot(IVector v) {
+   public IMatrix outer(IVector v) {
+      double[][] a = new double[length()][v.length()];
+      for (int i = 0; i < length(); i++) {
+         for (int j = 0; j < v.length(); j++) {
+            a[i][j] = get(i) * get(j);
+         }
+      }
+      return new SafeMatrix(a);
+   }
+
+   /**
+    * Returns the inner-product of the vector and the specified vector.
+    * 
+    * @param v
+    *           the inner vector.
+    * @return the inner-product of the vector multiplied by the specified
+    *         vector.
+    */
+   @Override
+   public double inner(IVector v) {
       if (v == null)
          throw new NullPointerException("Cannot access a null matrix.");
       if (length() != v.length())
          throw new MatrixDimensionException("Matrix dimension exception: vector lengths do not agree: " + length()
                + " and " + v.length() + ".");
-      return super.dot(v);
+      return super.inner(v);
    }
 
    // *************************** //
