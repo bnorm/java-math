@@ -78,7 +78,26 @@ public final class Differentiation {
     */
    public static double extrapDerivative(IFunction f, double x) {
       return extrapDerivative(f, x, 10);
+   }
 
+   /**
+    * Returns the functional representation of the Richardson Extrapolation of
+    * the derivative of the specified function. Every time the returned function
+    * is evaluated at a point the derivative of the specified function is
+    * calculated. The default number of iterations for the Richardson
+    * Extrapolation is 10.
+    * 
+    * @param f
+    *           the function to derive.
+    * @return the derivative of the function.
+    */
+   public static IFunction extrapDerivative(final IFunction f) {
+      return new AbstractFunction() {
+         @Override
+         public double f(double x) {
+            return extrapDerivative(f, x);
+         }
+      };
    }
 
    /**
