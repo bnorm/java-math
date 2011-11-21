@@ -12,7 +12,7 @@ import math.functions.IFunction;
 public final class Differentiation {
 
    /**
-    * Don't allow anyone to create an instance of this class.
+    * Don't let anyone instantiate this class.
     */
    private Differentiation() {
    }
