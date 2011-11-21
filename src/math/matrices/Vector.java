@@ -60,7 +60,7 @@ public class Vector extends AbstractVector {
     * @param m
     *           the matrix to copy.
     */
-   protected Vector(IMatrix m) {
+   public Vector(IMatrix m) {
       this();
       if (m.rows() == 1) {
          set(m.getRow(0));
