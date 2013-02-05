@@ -57,7 +57,7 @@ public interface IMatrix {
    public double[] getColumn(int c);
 
    // ******************************** //
-   // ***** MUNIPULATION METHODS ***** //
+   // ***** MANIPULATION METHODS ***** //
    // ******************************** //
 
    /**

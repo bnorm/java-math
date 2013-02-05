@@ -302,7 +302,7 @@ public class SafeVector extends Vector {
     *         specified matrix.
     */
    @Override
-   public AbstractMatrix multiply(IMatrix a) {
+   public Matrix multiply(IMatrix a) {
       if (a == null)
          throw new NullPointerException("Cannot access a null matrix.");
       if (columns() != a.rows())
@@ -411,7 +411,7 @@ public class SafeVector extends Vector {
     * {@inheritDoc}
     */
    @Override
-   public IMatrix outer(IVector v) {
+   public SafeMatrix outer(IVector v) {
       double[][] a = new double[length()][v.length()];
       for (int i = 0; i < length(); i++) {
          for (int j = 0; j < v.length(); j++) {
