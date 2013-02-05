@@ -1,10 +1,12 @@
 package math.calculus;
 
+
 import math.functions.IFunction;
+
 
 /**
  * A static library for integral calculations of functions.
- * 
+ *
  * @author Brian Norman
  * @version 0.1 beta
  */
@@ -17,21 +19,16 @@ public final class Integration {
    }
 
    /**
-    * Returns the lower summation of the function over the specified range with
-    * the specified number of devisions. Taken from Numerical Mathematics and
-    * Computing (6th Edition) by Ward Cheney and David Kincaid, page 185.
-    * 
-    * @param f
-    *           the function to summate.
-    * @param a
-    *           the starting point of the range.
-    * @param b
-    *           the ending point of the range.
-    * @param n
-    *           the number of devisions.
+    * Returns the lower summation of the function over the specified range with the specified number of divisions. Taken
+    * from Numerical Mathematics and Computing (6th Edition) by Ward Cheney and David Kincaid, page 185.
+    *
+    * @param f the function to summate.
+    * @param a the starting point of the range.
+    * @param b the ending point of the range.
+    * @param n the number of divisions.
     * @return the lower sum of the function.
     */
-   public static final double sumLower(IFunction f, double a, double b, int n) {
+   public static double sumLower(IFunction f, double a, double b, int n) {
       double h = (b - a) / n;
       double sum = 0.0;
       for (int i = n; i >= 1; i--) {
@@ -41,40 +38,30 @@ public final class Integration {
    }
 
    /**
-    * Returns the upper summation of the function over the specified range with
-    * the specified number of devisions. Taken from Numerical Mathematics and
-    * Computing (6th Edition) by Ward Cheney and David Kincaid, page 185.
-    * 
-    * @param f
-    *           the function to summate.
-    * @param a
-    *           the starting point of the range.
-    * @param b
-    *           the ending point of the range.
-    * @param n
-    *           the number of devisions.
+    * Returns the upper summation of the function over the specified range with the specified number of divisions. Taken
+    * from Numerical Mathematics and Computing (6th Edition) by Ward Cheney and David Kincaid, page 185.
+    *
+    * @param f the function to summate.
+    * @param a the starting point of the range.
+    * @param b the ending point of the range.
+    * @param n the number of divisions.
     * @return the upper sum of the function.
     */
-   public static final double sumUpper(IFunction f, double a, double b, int n) {
+   public static double sumUpper(IFunction f, double a, double b, int n) {
       return sumLower(f, a, b, n) + (b - a) * (f.eval(a) - f.eval(b)) / n;
    }
 
    /**
-    * Returns the trapizoid summation of the function over the specified range
-    * with the specified number of devisions. Taken from Numerical Mathematics
-    * and Computing (6th Edition) by Ward Cheney and David Kincaid, page 191.
-    * 
-    * @param f
-    *           the function to summate.
-    * @param a
-    *           the starting point of the range.
-    * @param b
-    *           the ending point of the range.
-    * @param n
-    *           the number of devision.
-    * @return the trapizoid sum of the function.
+    * Returns the trapezoid summation of the function over the specified range with the specified number of divisions.
+    * Taken from Numerical Mathematics and Computing (6th Edition) by Ward Cheney and David Kincaid, page 191.
+    *
+    * @param f the function to summate.
+    * @param a the starting point of the range.
+    * @param b the ending point of the range.
+    * @param n the number of division.
+    * @return the trapezoid sum of the function.
     */
-   public static final double trapizoid(IFunction f, double a, double b, int n) {
+   public static double trapizoid(IFunction f, double a, double b, int n) {
       double h = (b - a) / n;
       double sum = 1.0 / 2.0 * (f.eval(a) + f.eval(b));
       for (int i = 1; i < n; i++) {
@@ -84,22 +71,17 @@ public final class Integration {
    }
 
    /**
-    * Returns the Romberg extrapolated summation of the function over the
-    * specified range with the specified number of devisions. Taken from
-    * Numerical Mathematics and Computing (6th Edition) by Ward Cheney and David
-    * Kincaid, page 206.
-    * 
-    * @param f
-    *           the function to summate.
-    * @param a
-    *           the starting point of the range.
-    * @param b
-    *           the ending point of the range.
-    * @param n
-    *           the number of devision.
+    * Returns the Romberg extrapolated summation of the function over the specified range with the specified number of
+    * divisions. Taken from Numerical Mathematics and Computing (6th Edition) by Ward Cheney and David Kincaid, page
+    * 206.
+    *
+    * @param f the function to summate.
+    * @param a the starting point of the range.
+    * @param b the ending point of the range.
+    * @param n the number of division.
     * @return the Romberg sum of the function.
     */
-   public static final double romberg(IFunction f, double a, double b, int n) {
+   public static double romberg(IFunction f, double a, double b, int n) {
       double[] r = new double[n + 1];
 
       double h = b - a;
@@ -122,49 +104,35 @@ public final class Integration {
    }
 
    /**
-    * Returns the Simpson summation of the function over the specified range to
-    * the specified precision or max level of devision. Taken from Numerical
-    * Mathematics and Computing (6th Edition) by Ward Cheney and David Kincaid,
-    * page 224.
-    * 
-    * @param f
-    *           the function to summate.
-    * @param a
-    *           the starting point of the range.
-    * @param b
-    *           the ending point of the range.
-    * @param epsilon
-    *           the desired precision.
-    * @param level_max
-    *           the max level of devision.
+    * Returns the Simpson summation of the function over the specified range to the specified precision or max level of
+    * division. Taken from Numerical Mathematics and Computing (6th Edition) by Ward Cheney and David Kincaid, page
+    * 224.
+    *
+    * @param f         the function to summate.
+    * @param a         the starting point of the range.
+    * @param b         the ending point of the range.
+    * @param epsilon   the desired precision.
+    * @param level_max the max level of division.
     * @return the Simpson sum of the function.
     */
-   public static final double simpson(IFunction f, double a, double b, double epsilon, int level_max) {
+   public static double simpson(IFunction f, double a, double b, double epsilon, int level_max) {
       return simpson(f, a, b, epsilon, 0, level_max);
    }
 
    /**
-    * Returns the Simpson summation of the function over the specified range to
-    * the specified precision or max level of devision. This function is
-    * designed to be recursive and has a level for each call. Taken from
-    * Numerical Mathematics and Computing (6th Edition) by Ward Cheney and David
-    * Kincaid, page 224.
-    * 
-    * @param f
-    *           the function to summate.
-    * @param a
-    *           the starting point of the range.
-    * @param b
-    *           the ending point of the range.
-    * @param epsilon
-    *           the desired precision.
-    * @param level
-    *           the current level.
-    * @param level_max
-    *           the max level of devision.
+    * Returns the Simpson summation of the function over the specified range to the specified precision or max level of
+    * division. This function is designed to be recursive and has a level for each call. Taken from Numerical
+    * Mathematics and Computing (6th Edition) by Ward Cheney and David Kincaid, page 224.
+    *
+    * @param f         the function to summate.
+    * @param a         the starting point of the range.
+    * @param b         the ending point of the range.
+    * @param epsilon   the desired precision.
+    * @param level     the current level.
+    * @param level_max the max level of division.
     * @return the Simpson sum of the function.
     */
-   private static final double simpson(IFunction f, double a, double b, double epsilon, int level, int level_max) {
+   private static double simpson(IFunction f, double a, double b, double epsilon, int level, int level_max) {
       level++;
 
       double h = b - a;
@@ -183,9 +151,11 @@ public final class Integration {
       if (level >= level_max) {
          // System.out.println("Maximum level reached");
          return two_simp;
-      } else if (Math.abs(two_simp - one_simp) < 15.0 * epsilon) {
+      }
+      else if (Math.abs(two_simp - one_simp) < 15.0 * epsilon) {
          return two_simp + (two_simp - one_simp) / 15.0;
-      } else {
+      }
+      else {
          return simpson(f, a, c, epsilon / 2.0, level, level_max) + simpson(f, c, b, epsilon / 2.0, level, level_max);
       }
    }
