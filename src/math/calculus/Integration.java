@@ -35,7 +35,7 @@ public final class Integration {
       double h = (b - a) / n;
       double sum = 0.0;
       for (int i = n; i >= 1; i--) {
-         sum += f.f(a + i * h);
+         sum += f.eval(a + i * h);
       }
       return sum * h;
    }
@@ -56,7 +56,7 @@ public final class Integration {
     * @return the upper sum of the function.
     */
    public static final double sumUpper(IFunction f, double a, double b, int n) {
-      return sumLower(f, a, b, n) + (b - a) * (f.f(a) - f.f(b)) / n;
+      return sumLower(f, a, b, n) + (b - a) * (f.eval(a) - f.eval(b)) / n;
    }
 
    /**
@@ -76,9 +76,9 @@ public final class Integration {
     */
    public static final double trapizoid(IFunction f, double a, double b, int n) {
       double h = (b - a) / n;
-      double sum = 1.0 / 2.0 * (f.f(a) + f.f(b));
+      double sum = 1.0 / 2.0 * (f.eval(a) + f.eval(b));
       for (int i = 1; i < n; i++) {
-         sum += f.f(a + i * h);
+         sum += f.eval(a + i * h);
       }
       return sum * h;
    }
@@ -103,12 +103,12 @@ public final class Integration {
       double[] r = new double[n + 1];
 
       double h = b - a;
-      r[0] = (h / 2.0) * (f.f(a) + f.f(b));
+      r[0] = (h / 2.0) * (f.eval(a) + f.eval(b));
       for (int i = 1; i <= n; i++) {
          h = h / 2.0;
          double sum = 0.0;
          for (int k = 1; k <= Math.pow(2, i) - 1; k += 2) {
-            sum += f.f(a + k * h);
+            sum += f.eval(a + k * h);
          }
          r[i] = 1.0 / 2.0 * r[i - 1] + sum * h;
       }
@@ -172,13 +172,13 @@ public final class Integration {
       double d = (a + c) / 2.0;
       double e = (c + b) / 2.0;
 
-      double fa = f.f(a);
-      double fb = f.f(b);
-      double fc = f.f(c);
+      double fa = f.eval(a);
+      double fb = f.eval(b);
+      double fc = f.eval(c);
 
       double one_simp = h * (fa + 4.0 * fc + fb) / 6.0;
 
-      double two_simp = h * (fa + 4.0 * f.f(d) + 2.0 * fc + 4.0 * f.f(e) + fb) / 12.0;
+      double two_simp = h * (fa + 4.0 * f.eval(d) + 2.0 * fc + 4.0 * f.eval(e) + fb) / 12.0;
 
       if (level >= level_max) {
          // System.out.println("Maximum level reached");

@@ -40,10 +40,10 @@ public final class Differentiation {
     */
    public static double derivative(IFunction f, double x) {
       double h = hValue(x);
-      double xph = f.f(x + h);
-      double xmh = f.f(x - h);
+      double xph = f.eval(x + h);
+      double xmh = f.eval(x - h);
       return 1.0 / (2.0 * h) * (xph - xmh) - 1.0 / (12.0 * h)
-            * (f.f(x + 2.0 * h) - 2.0 * xph + 2.0 * xmh - f.f(x - 2.0 * h));
+            * (f.eval(x + 2.0 * h) - 2.0 * xph + 2.0 * xmh - f.eval(x - 2.0 * h));
    }
 
    /**
@@ -109,7 +109,7 @@ public final class Differentiation {
       double h = hValue(x);
 
       for (int i = 0; i <= n; i++) {
-         d[i] = (f.f(x + h) - f.f(x - h)) / (2.0 * h);
+         d[i] = (f.eval(x + h) - f.eval(x - h)) / (2.0 * h);
          h /= 2.0;
       }
       for (int i = 1; i <= n; i++)
@@ -145,7 +145,7 @@ public final class Differentiation {
     */
    public static double secondDerivative(IFunction f, double x) {
       double h = hValue(x);
-      return 1.0 / (h * h) * (f.f(x + h) - 2.0 * f.f(x) + f.f(x - h));
+      return 1.0 / (h * h) * (f.eval(x + h) - 2.0 * f.eval(x) + f.eval(x - h));
    }
 
    /**

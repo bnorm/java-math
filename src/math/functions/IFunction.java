@@ -18,7 +18,7 @@ public interface IFunction {
    *          input value.
    * @return output value.
    */
-  double f(double x);
+  double eval(double x);
 
   /**
    * Returns a new function that is a copy of this class and has the specified
@@ -29,7 +29,7 @@ public interface IFunction {
    * @return a new shifted function.
    */
   default IFunction add(double n) {
-     return x -> IFunction.this.f(x) + n;
+     return x -> IFunction.this.eval(x) + n;
   }
 
   /**
@@ -41,7 +41,7 @@ public interface IFunction {
    * @return a new shifted function.
    */
   default IFunction add(IFunction f) {
-     return x -> IFunction.this.f(x) + f.f(x);
+     return x -> IFunction.this.eval(x) + f.eval(x);
   }
 
   /**
@@ -65,7 +65,7 @@ public interface IFunction {
    * @return a new shifted function.
    */
   default IFunction subtract(IFunction f) {
-     return x -> IFunction.this.f(x) - f.f(x);
+     return x -> IFunction.this.eval(x) - f.eval(x);
   }
 
   /**
@@ -77,7 +77,7 @@ public interface IFunction {
    * @return a new scaled function.
    */
   default IFunction multiply(double n)  {
-     return x -> IFunction.this.f(x) * n;
+     return x -> IFunction.this.eval(x) * n;
   }
 
   /**
@@ -89,7 +89,7 @@ public interface IFunction {
    * @return a new scaled function.
    */
   default IFunction multiply(IFunction f) {
-     return x -> IFunction.this.f(x) + f.f(x);
+     return x -> IFunction.this.eval(x) + f.eval(x);
   }
 
    /**
@@ -113,7 +113,7 @@ public interface IFunction {
    * @return a new scaled function.
    */
   default IFunction divide(IFunction f) {
-     return x -> IFunction.this.f(x) / f.f(x);
+     return x -> IFunction.this.eval(x) / f.eval(x);
   }
 
   /**
@@ -125,7 +125,7 @@ public interface IFunction {
    * @return a new composite function.
    */
   default IFunction composite(IFunction f) {
-     return x -> IFunction.this.f(f.f(x));
+     return x -> IFunction.this.eval(f.eval(x));
   }
 
 }
