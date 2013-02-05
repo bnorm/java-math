@@ -1,6 +1,5 @@
 package math.calculus;
 
-import math.functions.AbstractFunction;
 import math.functions.IFunction;
 
 /**
@@ -57,12 +56,7 @@ public final class Differentiation {
     * @return the derivative of the function.
     */
    public static IFunction derivative(final IFunction f) {
-      return new AbstractFunction() {
-         @Override
-         public double f(double x) {
-            return derivative(f, x);
-         }
-      };
+      return x -> derivative(f, x);
    }
 
    /**
@@ -92,12 +86,7 @@ public final class Differentiation {
     * @return the derivative of the function.
     */
    public static IFunction extrapDerivative(final IFunction f) {
-      return new AbstractFunction() {
-         @Override
-         public double f(double x) {
-            return extrapDerivative(f, x);
-         }
-      };
+      return x -> extrapDerivative(f, x);
    }
 
    /**
@@ -140,12 +129,7 @@ public final class Differentiation {
     * @return the derivative of the function.
     */
    public static IFunction extrapDerivative(final IFunction f, final int n) {
-      return new AbstractFunction() {
-         @Override
-         public double f(double x) {
-            return extrapDerivative(f, x, n);
-         }
-      };
+      return x -> extrapDerivative(f, x, n);
    }
 
    /**
@@ -174,12 +158,7 @@ public final class Differentiation {
     * @return the second derivative of the function.
     */
    public static IFunction secondDerivative(final IFunction f) {
-      return new AbstractFunction() {
-         @Override
-         public double f(double x) {
-            return secondDerivative(f, x);
-         }
-      };
+      return x -> secondDerivative(f, x);
    }
 
 }

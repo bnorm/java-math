@@ -18,17 +18,19 @@ public interface IFunction {
    *          input value.
    * @return output value.
    */
-  public double f(double x);
+  double f(double x);
 
   /**
    * Returns a new function that is a copy of this class and has the specified
    * value added to its output.
    * 
-   * @param a
+   * @param n
    *          the value by which the output is shifted.
    * @return a new shifted function.
    */
-  public IFunction add(double a);
+  default IFunction add(double n) {
+     return x -> IFunction.this.f(x) + n;
+  }
 
   /**
    * Returns a new function that is a copy of this class and has the specified
@@ -38,17 +40,21 @@ public interface IFunction {
    *          the function by which this class is shifted.
    * @return a new shifted function.
    */
-  public IFunction add(IFunction f);
+  default IFunction add(IFunction f) {
+     return x -> IFunction.this.f(x) + f.f(x);
+  }
 
   /**
    * Returns a new function that is a copy of this class and has the specified
    * value subtracted from its output.
    * 
-   * @param a
+   * @param n
    *          the value by which the output is shifted.
    * @return a new shifted function.
    */
-  public IFunction subtract(double a);
+  default IFunction subtract(double n) {
+     return add(-n);
+  }
 
   /**
    * Returns a new function that is a copy of this class and has the specified
@@ -58,17 +64,21 @@ public interface IFunction {
    *          the function by which this class is shifted.
    * @return a new shifted function.
    */
-  public IFunction subtract(IFunction f);
+  default IFunction subtract(IFunction f) {
+     return x -> IFunction.this.f(x) - f.f(x);
+  }
 
   /**
    * Returns a new function that is a copy of this class and has its output
    * multiplied by the specified value.
    * 
-   * @param a
+   * @param n
    *          the value by which the output is scaled.
    * @return a new scaled function.
    */
-  public IFunction multiply(double a);
+  default IFunction multiply(double n)  {
+     return x -> IFunction.this.f(x) * n;
+  }
 
   /**
    * Returns a new function that is a copy of this class and has its output
@@ -78,7 +88,21 @@ public interface IFunction {
    *          the function by which the output is scaled.
    * @return a new scaled function.
    */
-  public IFunction multiply(IFunction f);
+  default IFunction multiply(IFunction f) {
+     return x -> IFunction.this.f(x) + f.f(x);
+  }
+
+   /**
+    * Returns a new function that is a copy of this class and has its output
+    * divided by the specified value.
+    *
+    * @param n
+    *          the value by which the output is scaled.
+    * @return a new scaled function.
+    */
+   default IFunction divide(double n) {
+      return multiply(1.0 / n);
+   }
 
   /**
    * Returns a new function that is a copy of this class and has its output
@@ -88,17 +112,9 @@ public interface IFunction {
    *          the function by which the output is scaled.
    * @return a new scaled function.
    */
-  public IFunction divide(IFunction f);
-
-  /**
-   * Returns a new function that is a copy of this class and has its output
-   * divided by the specified value.
-   * 
-   * @param a
-   *          the value by which the output is scaled.
-   * @return a new scaled function.
-   */
-  public IFunction divide(double a);
+  default IFunction divide(IFunction f) {
+     return x -> IFunction.this.f(x) / f.f(x);
+  }
 
   /**
    * Returns a new function that is a copy of this class and has its input first
@@ -108,6 +124,8 @@ public interface IFunction {
    *          the function that evaluates the input first.
    * @return a new composite function.
    */
-  public IFunction composite(IFunction f);
+  default IFunction composite(IFunction f) {
+     return x -> IFunction.this.f(f.f(x));
+  }
 
 }
