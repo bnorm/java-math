@@ -45,6 +45,9 @@ public interface IVector extends IMatrix {
       return this;
    }
 
+   @Override
+   IVector set(double[][] a);
+
    /**
     * Sets the value at the corresponding index to be the specified value.
     * <p/>
@@ -61,6 +64,19 @@ public interface IVector extends IMatrix {
          set(i, 0, n);
       }
       return this;
+   }
+
+   @Override
+   IVector set(int r, int c, double n);
+
+   @Override
+   default IVector setRow(int r, double[] v) {
+      return (IVector) IMatrix.super.setRow(r, v);
+   }
+
+   @Override
+   default IVector setColumn(int c, double[] v) {
+      return (IVector) IMatrix.super.setColumn(c, v);
    }
 
    /**
@@ -86,8 +102,18 @@ public interface IVector extends IMatrix {
    }
 
    @Override
+   default IVector set(int r, int c, double[][] a) {
+      return (IVector) IMatrix.super.set(r, c, a);
+   }
+
+   @Override
    default IVector transpose() {
       return (IVector) IMatrix.super.transpose();
+   }
+
+   @Override
+   default IVector inverse() {
+      return (IVector) IMatrix.super.inverse();
    }
 
    @Override
@@ -113,6 +139,11 @@ public interface IVector extends IMatrix {
       return (IVector) IMatrix.super.add(b);
    }
 
+   @Override
+   default IVector add(IMatrix a) {
+      return (IVector) IMatrix.super.add(a);
+   }
+
    /**
     * Subtracts the specified vector to the original vector. This operation is value based and will subtract
     * corresponding index values. This method modifies the original values of the vector.
@@ -131,40 +162,9 @@ public interface IVector extends IMatrix {
       return (IVector) IMatrix.super.subtract(b);
    }
 
-   /**
-    * Dot-wise multiplies the specified vector to the original vector. This operation is value based and will multiply
-    * corresponding index values. This method modifies the original values of the vector.
-    * <p/>
-    * Unsafe method, does not perform dimension checks.
-    *
-    * @param v the vector to dot-multiply.
-    * @return the original vector modified with the dot-multiplication of the specified vector.
-    */
-   default IVector dotMultiply(IVector v) {
-      IVector b = v;
-      // If they don't have the same orientation...
-      if (columns() > rows() != v.columns() > v.rows()) {
-         b = b.copy().transpose();
-      }
-      return (IVector) IMatrix.super.dotMultiply(b);
-   }
-
-   /**
-    * Dot-wise divides the specified vector to the original vector. This operation is value based and will divide
-    * corresponding index values. This method modifies the original values of the vector.
-    * <p/>
-    * Unsafe method, does not perform dimension checks.
-    *
-    * @param v the vector to dot-divide.
-    * @return the original vector modified with the dot-division of the specified vector.
-    */
-   default IVector dotDivide(IVector v) {
-      IVector b = v;
-      // If they don't have the same orientation...
-      if (columns() > rows() != v.columns() > v.rows()) {
-         b = b.copy().transpose();
-      }
-      return (IVector) IMatrix.super.dotDivide(b);
+   @Override
+   default IVector subtract(IMatrix a) {
+      return (IVector) IMatrix.super.subtract(a);
    }
 
    /**
@@ -207,6 +207,57 @@ public interface IVector extends IMatrix {
          b = v.copy().transpose();
       }
       return a.multiply(b).get(0, 0);
+   }
+
+   @Override
+   default IVector multiply(IMatrix a) {
+      return (IVector) IMatrix.super.multiply(a);
+   }
+
+   /**
+    * Dot-wise multiplies the specified vector to the original vector. This operation is value based and will multiply
+    * corresponding index values. This method modifies the original values of the vector.
+    * <p/>
+    * Unsafe method, does not perform dimension checks.
+    *
+    * @param v the vector to dot-multiply.
+    * @return the original vector modified with the dot-multiplication of the specified vector.
+    */
+   default IVector dotMultiply(IVector v) {
+      IVector b = v;
+      // If they don't have the same orientation...
+      if (columns() > rows() != v.columns() > v.rows()) {
+         b = b.copy().transpose();
+      }
+      return (IVector) IMatrix.super.dotMultiply(b);
+   }
+
+   @Override
+   default IVector dotMultiply(IMatrix a) {
+      return (IVector) IMatrix.super.dotMultiply(a);
+   }
+
+   /**
+    * Dot-wise divides the specified vector to the original vector. This operation is value based and will divide
+    * corresponding index values. This method modifies the original values of the vector.
+    * <p/>
+    * Unsafe method, does not perform dimension checks.
+    *
+    * @param v the vector to dot-divide.
+    * @return the original vector modified with the dot-division of the specified vector.
+    */
+   default IVector dotDivide(IVector v) {
+      IVector b = v;
+      // If they don't have the same orientation...
+      if (columns() > rows() != v.columns() > v.rows()) {
+         b = b.copy().transpose();
+      }
+      return (IVector) IMatrix.super.dotDivide(b);
+   }
+
+   @Override
+   default IVector dotDivide(IMatrix a) {
+      return (IVector) IMatrix.super.dotDivide(a);
    }
 
    @Override
