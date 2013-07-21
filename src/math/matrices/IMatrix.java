@@ -1,6 +1,5 @@
 package math.matrices;
 
-
 /**
  * A object representation of a mathematical matrix. This interface provides basic use and manipulation methods.
  *
@@ -8,10 +7,6 @@ package math.matrices;
  * @version 0.1 beta
  */
 public interface IMatrix {
-
-   // ************************** //
-   // ***** ACCESS METHODS ***** //
-   // ************************** //
 
    /**
     * Returns the number of rows the matrix has.
@@ -68,13 +63,11 @@ public interface IMatrix {
       return v;
    }
 
-   // ******************************** //
-   // ***** MANIPULATION METHODS ***** //
-   // ******************************** //
-
    /**
-    * Sets the matrix to be the specified array. This method does not copy but sets the array which will change if the
+    * Sets the matrix to be the specified array.  This method does not copy but sets the array which will change if the
     * matrix is modified.
+    * <p/>
+    * Note: this changes the underlying data structure to a different data structure since the dimensions might change.
     *
     * @param a the new array for the matrix.
     * @return the matrix representation of the array.
@@ -83,6 +76,8 @@ public interface IMatrix {
 
    /**
     * Sets the value at the corresponding row and column with the specified new value.
+    * <p/>
+    * Unsafe method, does not perform dimension checks.
     *
     * @param r the row of the new value.
     * @param c the column of the new value.
@@ -142,13 +137,11 @@ public interface IMatrix {
       return this;
    }
 
-   // ***************************** //
-   // ***** OPERATION METHODS ***** //
-   // ***************************** //
-
    /**
-    * Returns the transpose of the matrix. This operation does not create a new matrix but modifies the original
+    * Returns the transpose of the matrix.  This operation does not create a new matrix but modifies the original
     * matrix.
+    * <p/>
+    * Note: this changes the underlying data structure to a different data structure since the dimensions might change.
     *
     * @return the transpose of the matrix.
     */
@@ -163,7 +156,7 @@ public interface IMatrix {
    }
 
    /**
-    * Returns the inverse of the matrix. This operation does not create a new matrix but modifies the original matrix.
+    * Returns the inverse of the matrix.  This operation does not create a new matrix but modifies the original matrix.
     *
     * @return the inverse of the matrix.
     */
@@ -172,7 +165,7 @@ public interface IMatrix {
    }
 
    /**
-    * Scales the matrix by multiplying the specified value against all the values of this matrix. This method modifies
+    * Scales the matrix by multiplying the specified value against all the values of this matrix.  This method modifies
     * the original values of the matrix.
     *
     * @param n the scaling factor.
@@ -188,8 +181,8 @@ public interface IMatrix {
    }
 
    /**
-    * Adds the specified matrix to the original matrix. This operation is value based and will add corresponding
-    * row-column values. This method modifies the original values of the matrix.
+    * Adds the specified matrix to the original matrix.  This operation is value based and will add corresponding
+    * row-column values.  This method modifies the original values of the matrix.
     * <p/>
     * Unsafe method, does not perform dimension checks.
     *
@@ -206,8 +199,8 @@ public interface IMatrix {
    }
 
    /**
-    * Subtracts the specified matrix to the original matrix. This operation is value based and will subtract
-    * corresponding row-column values. This method modifies the original values of the matrix.
+    * Subtracts the specified matrix to the original matrix.  This operation is value based and will subtract
+    * corresponding row-column values.  This method modifies the original values of the matrix.
     * <p/>
     * Unsafe method, does not perform dimension checks.
     *
@@ -224,10 +217,12 @@ public interface IMatrix {
    }
 
    /**
-    * Matrix-multiplies the specified matrix against the original matrix. This method modifies the original matrix by
+    * Matrix-multiplies the specified matrix against the original matrix.  This method modifies the original matrix by
     * setting it equal to the resulting matrix.
     * <p/>
     * Unsafe method, does not perform dimension checks.
+    * <p/>
+    * Note: this changes the underlying data structure to a different data structure since the dimensions might change.
     *
     * @param a the matrix to matrix-multiply.
     * @return the original matrix modified with the matrix-multiplication by the specified matrix.
@@ -238,7 +233,6 @@ public interface IMatrix {
          for (int j = 0; j < a.columns(); j++) {
             double sum = 0;
             for (int k = 0; k < a.rows(); k++) {
-               // sum += matrix[i][k] * a.get(k, j);
                sum += get(i, k) * a.get(k, j);
             }
             c[i][j] = sum;
@@ -248,7 +242,7 @@ public interface IMatrix {
    }
 
    /**
-    * Dot-wise multiplies the specified matrix to the original matrix. This operation is value based and will multiply
+    * Dot-wise multiplies the specified matrix to the original matrix.  This operation is value based and will multiply
     * corresponding row-column values. This method modifies the original values of the matrix.
     * <p/>
     * Unsafe method, does not perform dimension checks.
@@ -266,7 +260,7 @@ public interface IMatrix {
    }
 
    /**
-    * Dot-wise divides the specified matrix to the original matrix. This operation is value based and will divide
+    * Dot-wise divides the specified matrix to the original matrix.  This operation is value based and will divide
     * corresponding row-column values. This method modifies the original values of the matrix.
     * <p/>
     * Unsafe method, does not perform dimension checks.
@@ -282,10 +276,6 @@ public interface IMatrix {
       }
       return this;
    }
-
-   // *************************** //
-   // ***** UTILITY METHODS ***** //
-   // *************************** //
 
    /**
     * Returns a copy of the matrix.
