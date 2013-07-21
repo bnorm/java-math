@@ -14,7 +14,7 @@ public interface IVector extends IMatrix {
     * @return the length of the vector.
     */
    default int length() {
-      return Math.max(rows(), columns());
+      return columns() == 1 ? rows() : columns();
    }
 
    /**
