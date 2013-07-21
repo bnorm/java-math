@@ -1,13 +1,13 @@
 package math.functions;
 
-
 /**
- * Defines a mathematical relationship that represents a function. Used to describe a relationship between an input
+ * Defines a mathematical relationship that represents a function.  Used to describe a relationship between an input
  * space and an output space. For the case of this representation the space is one dimensional.
  *
  * @author Brian Norman
  * @version 0.1 beta
  */
+@FunctionalInterface
 public interface IFunction {
 
    /**
@@ -71,14 +71,14 @@ public interface IFunction {
    }
 
    /**
-    * Returns a new function that is a copy of this class and has its output multiplied by the specified function at the
-    * same input.
+    * Returns a new function that is a copy of this class and has its output multiplied by the specified function at
+    * the same input.
     *
     * @param f the function by which the output is scaled.
     * @return a new scaled function.
     */
    default IFunction multiply(IFunction f) {
-      return x -> IFunction.this.eval(x) + f.eval(x);
+      return x -> IFunction.this.eval(x) * f.eval(x);
    }
 
    /**
@@ -112,5 +112,4 @@ public interface IFunction {
    default IFunction composite(IFunction f) {
       return x -> IFunction.this.eval(f.eval(x));
    }
-
 }
