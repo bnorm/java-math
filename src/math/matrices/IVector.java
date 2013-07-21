@@ -1,6 +1,5 @@
 package math.matrices;
 
-
 /**
  * The object representation of a mathematical vector. This interface provides basic use and manipulation methods.
  *
@@ -8,10 +7,6 @@ package math.matrices;
  * @version 0.1 beta
  */
 public interface IVector extends IMatrix {
-
-   // ************************** //
-   // ***** ACCESS METHODS ***** //
-   // ************************** //
 
    /**
     * Returns the length of the vector.
@@ -32,16 +27,11 @@ public interface IVector extends IMatrix {
     */
    default double get(int i) {
       if (columns() > rows()) {
+         return get(0, i);
+      } else {
          return get(i, 0);
       }
-      else {
-         return get(0, i);
-      }
    }
-
-   // ******************************** //
-   // ***** MANIPULATION METHODS ***** //
-   // ******************************** //
 
    /**
     * Sets the vector to be the specified array. This methods does not copy but sets the array which will change if the
@@ -66,10 +56,9 @@ public interface IVector extends IMatrix {
     */
    default IVector set(int i, double n) {
       if (columns() > rows()) {
-         set(i, 0, n);
-      }
-      else {
          set(0, i, n);
+      } else {
+         set(i, 0, n);
       }
       return this;
    }
@@ -84,32 +73,26 @@ public interface IVector extends IMatrix {
     * @return the original matrix modified with the new values.
     */
    default IVector set(int i, double[] v) {
-      for (int n = 0; n < v.length; n++) {
-         set(i + n, v[n]);
+      if (columns() > rows()) {
+         for (int n = 0; n < v.length; n++) {
+            set(0, i + n, v[n]);
+         }
+      } else {
+         for (int n = 0; n < v.length; n++) {
+            set(i + n, 0, v[n]);
+         }
       }
       return this;
    }
 
-   // ***************************** //
-   // ***** OPERATION METHODS ***** //
-   // ***************************** //
-
-   /**
-    * {@inheritDoc}
-    */
    @Override
    default IVector transpose() {
-      IMatrix.super.transpose();
-      return this;
+      return (IVector) IMatrix.super.transpose();
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    default IVector scale(double n) {
-      IMatrix.super.scale(n);
-      return this;
+      return (IVector) IMatrix.super.scale(n);
    }
 
    /**
@@ -122,8 +105,12 @@ public interface IVector extends IMatrix {
     * @return the original vector modified with the addition of the specified a vector.
     */
    default IVector add(IVector v) {
-      IMatrix.super.add(v);
-      return this;
+      IVector b = v;
+      // If they don't have the same orientation...
+      if (columns() > rows() != v.columns() > v.rows()) {
+         b = b.copy().transpose();
+      }
+      return (IVector) IMatrix.super.add(b);
    }
 
    /**
@@ -136,8 +123,12 @@ public interface IVector extends IMatrix {
     * @return the original vector modified with the subtraction of the specified vector.
     */
    default IVector subtract(IVector v) {
-      IMatrix.super.subtract(v);
-      return this;
+      IVector b = v;
+      // If they don't have the same orientation...
+      if (columns() > rows() != v.columns() > v.rows()) {
+         b = b.copy().transpose();
+      }
+      return (IVector) IMatrix.super.subtract(b);
    }
 
    /**
@@ -150,8 +141,12 @@ public interface IVector extends IMatrix {
     * @return the original vector modified with the dot-multiplication of the specified vector.
     */
    default IVector dotMultiply(IVector v) {
-      IMatrix.super.dotMultiply(v);
-      return this;
+      IVector b = v;
+      // If they don't have the same orientation...
+      if (columns() > rows() != v.columns() > v.rows()) {
+         b = b.copy().transpose();
+      }
+      return (IVector) IMatrix.super.dotMultiply(b);
    }
 
    /**
@@ -164,8 +159,12 @@ public interface IVector extends IMatrix {
     * @return the original vector modified with the dot-division of the specified vector.
     */
    default IVector dotDivide(IVector v) {
-      IMatrix.super.dotDivide(v);
-      return this;
+      IVector b = v;
+      // If they don't have the same orientation...
+      if (columns() > rows() != v.columns() > v.rows()) {
+         b = b.copy().transpose();
+      }
+      return (IVector) IMatrix.super.dotDivide(b);
    }
 
    /**
@@ -175,13 +174,17 @@ public interface IVector extends IMatrix {
     * @return the outer-product of the vector multiplied by the specified vector.
     */
    default IMatrix outer(IVector v) {
-      double[][] a = new double[length()][v.length()];
-      for (int i = 0; i < length(); i++) {
-         for (int j = 0; j < v.length(); j++) {
-            a[i][j] = get(i) * get(j);
-         }
+      IVector a = v.copy();
+      // make 'a' a column vector
+      if (columns() < rows()) {
+         a.transpose();
       }
-      return new Matrix(a);
+      IVector b = v;
+      // make 'b' a row vector (don't modify v though)
+      if (b.rows() < b.columns()) {
+         b = v.copy().transpose();
+      }
+      return a.multiply(b);
    }
 
    /**
@@ -193,22 +196,19 @@ public interface IVector extends IMatrix {
     * @return the inner-product of the vector multiplied by the specified vector.
     */
    default double inner(IVector v) {
-      double sum = 0;
-      for (int i = 0; i < length(); i++) {
-         sum += get(i) * v.get(i);
+      IVector a = copy();
+      // make 'a' a row vector
+      if (rows() < columns()) {
+         a.transpose();
       }
-      return sum;
+      IVector b = v;
+      // make 'b' a column vector (don't modify v though)
+      if (b.columns() < b.rows()) {
+         b = v.copy().transpose();
+      }
+      return a.multiply(b).get(0, 0);
    }
 
-   // *************************** //
-   // ***** UTILITY METHODS ***** //
-   // *************************** //
-
-   /**
-    * Returns a copy of the vector.
-    *
-    * @return a copy of the vector.
-    */
    @Override
    public IVector copy();
 
